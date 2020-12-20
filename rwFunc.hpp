@@ -1,6 +1,7 @@
 #ifndef RWFUNC_HPP
 #define RWFUNC_HPP
 #include <string>
+#include <map>
 
 using std::string;
 

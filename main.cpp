@@ -4,6 +4,7 @@
 #include <cctype>
 #include <rwFunc.hpp>
 #include <menu.hpp>
+#include <map>
 
 using namespace std;
 

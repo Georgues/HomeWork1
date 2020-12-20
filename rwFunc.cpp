@@ -2,22 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <map>
 
-using std::string;
-using std::endl;
-using std::ifstream;
-using std::cerr;
-using std::getline;
-using std::cout;
-using std::cin;
-using std::ofstream;
-using std::left;
-using std::right;
-using std::setw;
-using std::setfill;
+using namespace std;
 
 void read(const std::string &fileName, deviceCollection *devices)
 {
+
     ifstream in(fileName); //файловый поток для считывания данных
     if (!in.is_open()){
         cerr << "\n Ошибка при открытии файла " << fileName << endl;
@@ -46,6 +37,11 @@ void read(const std::string &fileName, deviceCollection *devices)
 
 void write(deviceCollection *devices)
 {
+    // Словари для перевода числовых данных из базы в текстовые
+    map <int, string> availability = {{0, "Нет в наличии"}, {1, "Есть в наличии"}};
+
+    map <int, string> deviceType = {{0, "Смартфон"}, {1, "Смартчасы"}};
+
     cout << "Введите названия файла: ";
     string fileName;
     cin >> fileName;
@@ -59,8 +55,8 @@ void write(deviceCollection *devices)
         out << devices[i].id << ";"
             << devices[i].producer << ";"
             << devices[i].model << ";"
-            << devices[i].available << ";"
-            << devices[i].type << ";"
+            << availability[devices[i].available] << ";"
+            << deviceType[devices[i].type] << ";"
             << devices[i].price << ";"<< endl;
 
     }
@@ -70,12 +66,16 @@ void write(deviceCollection *devices)
 
 void display(const deviceCollection * const devices)
 {
+    map <int, string> availability = {{0, "Нет в наличии"}, {1, "Есть в наличии"}};
+
+    map <int, string> deviceType = {{0, "Смартфон"}, {1, "Наушники"}, {2, "Смартчасы"}};
+
     for(int i = 0; i < items; i++){
         cout << devices[i].id << ";"
              << devices[i].producer << ";"
              << devices[i].model << ";"
-             << devices[i].available << ";"
-             << devices[i].type << ";"
+             << availability[devices[i].available] << ";"
+             << deviceType[devices[i].type] << ";"
              << devices[i].price << ";"<< endl;
     }
 }
